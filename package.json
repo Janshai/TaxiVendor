@@ -1,0 +1,22 @@
+{
+  "name": "taxivendor",
+  "version": "1.0.0",
+  "description": "taxi vendor app for BookingGo grad scheme",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Janshai/TaxiVendor.git"
+  },
+  "author": "Jack Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Janshai/TaxiVendor/issues"
+  },
+  "homepage": "https://github.com/Janshai/TaxiVendor#readme",
+  "dependencies": {
+    "yargs": "^14.0.0"
+  }
+}
