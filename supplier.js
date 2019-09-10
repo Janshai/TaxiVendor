@@ -7,9 +7,10 @@ function getRideOptions(supplier, pickup, dropoff) {
     return new Promise((resolve, reject) => {
         superagent.get(url)
         .query({ pickup: pickup, dropoff: dropoff })
+        .timeout({response: 2000})
         .end((err, res) => {
             if (err) {
-                reject(parseError(err.response.body))
+                return reject(parseError(err, supplier))
             }
             let carList = unWrapCarList(res.body)
             resolve(carList)
@@ -30,13 +31,18 @@ function unWrapCarList(json) {
     return carList
 }
 
-function parseError(error) {
-    if (error.status == 400) {
-        return error.message
-    } else if (error.status == 500) {
-        return error.error
+function parseError(error, supplier) {
+    if (error.timeout) {
+        return supplier + " timed out."
+    }
+    let errorBody = error.response.body
+    let supplierID = " for supplier: " + supplier
+    if (errorBody.status == 400) {
+        return errorBody.message + supplierID
+    } else if (errorBody.status == 500) {
+        return errorBody.error + supplierID
     } else {
-        return "Unknown Error"
+        return "Unknown Error" + supplierID
     }
 
 }
