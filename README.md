@@ -2,7 +2,7 @@
 
 
 ## Setup
-###Dependencies:
+### Dependencies:
 
 * npm (I am using version 6.11.3)
 * javascript
@@ -12,7 +12,7 @@
 * yargs (^14.0.0)
 
 
-###Dependency Installation Instructions:
+### Dependency Installation Instructions:
 
 Running `npm install` inside the root directory should install all necessary dependencies.
 
@@ -25,7 +25,7 @@ Example:
 
 `node console-app.js 51.470020,-0.454295 51.00000,1.0000 dave` searches for the results from Dave's Taxis.
 
-THis command will work for all three of the suppliers.
+This command will work for all three of the suppliers.
 
 ### Console application to filter by number of passengers
 
@@ -42,22 +42,22 @@ Example:
 
 `node console-app.js 51.470020,-0.454295 51.00000,1.0000`
 
-##Part 2
+## Part 2
 
-###Start Up
+### Start Up
 
 `node app.js` or `npm start` from the root directory.
 
-###GET Requests
-####URL
+### GET Requests
+#### URL
 `localhost:8000/rides/`
 
-####Parameters
+#### Parameters
 * pickup: Longitude,Lattitude
 * dropoff: Longitude,Latittude
 * passengers (optional): Integer
 
-####Response
+#### Response
 
 ``` javascript
 {
@@ -70,10 +70,10 @@ Example:
 }
 ```
 
-####Example Request
+#### Example Request
 `GET localhost:8000/rides/?pickup=51.470020,-0.454295&dropoff=-1.0448392,52.5649&passengers=5`
 
-####Example Response
+#### Example Response
 
 ```
 {
@@ -110,7 +110,7 @@ If there are errors that cause the requests to each supplier to fail, the respon
 ```
 
 
-####Other Request
+#### Other Request
 
 You can also limit your search to just one supplier by putting the supplierID before the parameters
 
