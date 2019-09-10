@@ -1,5 +1,5 @@
 const yargs = require('yargs')
-const cars = require('./cars')
+const cars = require('./controllers/cars')
 
 const argsErrorString = `Error, please provide a pickup and dropoff (longitude,lattitude)\n
 Examples:\n
