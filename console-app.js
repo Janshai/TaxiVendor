@@ -54,7 +54,7 @@ function singleVendorApplication(vendor, pickup, dropoff, passengers) {
 function allVendorsApplication(pickup, dropoff, passengers) {
     cars.getRideOptions(pickup, dropoff, passengers)
     .then(rides => {
-        if (Object.keys(rides).length == 0) {
+        if (Object.keys(rides).length == 1) {
             console.log("No rides available right now, please try again later.")
         } else {
             for (i in rides) {
