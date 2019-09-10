@@ -18,6 +18,12 @@ function main() {
     let pickup = yargs.argv._[0]
     let dropoff = yargs.argv._[1]
 
+    if (passengers) {
+        if(!Number.isInteger(passengers)) {
+            return console.log("Invalid Passengers Parameter")
+        }
+    }
+
     if (yargs.argv._.length == 3) {
         let vendor = yargs.argv._[2]
         if ((vendor == "dave") || (vendor == "eric") || (vendor == "jeff")) {
