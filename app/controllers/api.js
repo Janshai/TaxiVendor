@@ -3,12 +3,42 @@ const cars = require('./cars')
 function getAll(req, res) {
     let pickup = req.query.pickup
     let dropoff = req.query.dropoff
-    let passengers = req.query.passengers
-    validateParameters(pickup, dropoff, passengers, undefined, res)
+    var passengers
+    if (req.query.passengers) {
+        let passengers = parseInt(req.query.passengers)
+    } else {
+        passengers = undefined
+    }
+    if (!validateParameters(pickup, dropoff, passengers, undefined, res)) {
+        return
+    }
 
     cars.getRideOptions(pickup, dropoff, passengers)
     .then(rides => {
-        res.json(rides)
+        if(Object.keys(rides).length == 1 && rides.errors.length == 3) {
+            let error = rides.errors[0]
+            if (error.includes("Internal") || error.includes("timed out")) {
+                let resBody = {
+                    status: 500,
+                    error: "Internal Server Error",
+                    message: error
+                }
+                res.status(500)
+                res.json(resBody)
+            } else {
+                let resBody = {
+                    status: 400,
+                    error: "Bad Request",
+                    message: error
+                }
+                res.status(500)
+                res.json(resBody)
+            }
+        } else {
+            res.json(rides)
+        }
+
+
     })
 
 }
@@ -16,9 +46,17 @@ function getAll(req, res) {
 function getSingleVendor(req, res) {
     let pickup = req.query.pickup
     let dropoff = req.query.dropoff
-    let passengers = req.query.passengers
+    var passengers
+    if (req.query.passengers) {
+        let passengers = parseInt(req.query.passengers)
+    } else {
+        passengers = undefined
+    }
+
     let vendor = req.params.vendorID
-    validateParameters(pickup, dropoff, passengers, vendor, res)
+    if (!validateParameters(pickup, dropoff, passengers, undefined, res)) {
+        return
+    }
 
     cars.getRideOptionsForSingleVendor(vendor, pickup, dropoff, passengers)
     .then(rides => {
@@ -53,6 +91,7 @@ function validateParameters(pickup, dropoff, passengers, vendor, res) {
         }
         res.status(400)
         res.json(resBody)
+        return false
     } else if (dropoff === undefined) {
         let resBody = {
             status: 400,
@@ -61,7 +100,9 @@ function validateParameters(pickup, dropoff, passengers, vendor, res) {
         }
         res.status(400)
         res.json(resBody)
-    } else if (Number.isInteger(passengers)) {
+        return false
+    } else if (isNaN(passengers) && passengers !== undefined) {
+
         let resBody = {
             status: 400,
             error: "Bad Request",
@@ -69,6 +110,7 @@ function validateParameters(pickup, dropoff, passengers, vendor, res) {
         }
         res.status(400)
         res.json(resBody)
+        return false
     } else if (vendor) {
         if ((vendor != "dave") && (vendor != "eric") && (vendor != "jeff")) {
             let resBody = {
@@ -78,9 +120,10 @@ function validateParameters(pickup, dropoff, passengers, vendor, res) {
             }
             res.status(400)
             res.json(resBody)
+            return false
         }
     }
-
+    return true
 }
 
 module.exports = { getAll, getSingleVendor }
