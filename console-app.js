@@ -14,14 +14,14 @@ function main() {
         return
     }
 
+    let passengers = yargs.argv.passengers
 
-
-    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], (err, carList) => {
+    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], passengers, (err, carList) => {
         if (err) { return console.log("Error: " + err)}
 
         for (i in carList) {
             let car = carList[i]
-            let string = car.type + " " + car.price
+            let string = car.type + " - " + car.price
             console.log(string)
         }
     })

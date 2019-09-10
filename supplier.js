@@ -10,7 +10,6 @@ function getRideOptions(supplier, pickup, dropoff, callback) {
         if (err) {
             return callback(parseError(err.response.body))
         }
-
         let carList = unWrapCarList(res.body)
         callback(undefined, carList)
     })
