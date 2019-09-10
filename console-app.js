@@ -2,9 +2,9 @@ const yargs = require('yargs')
 const cars = require('./app/controllers/cars')
 
 const argsErrorString = `Error, please provide a pickup and dropoff (longitude,lattitude)\n
-Examples:\n
+Example:\n
 node console-app.js 51.470020,-0.454295 51.00000,1.0000
-npm run console 51.470020,-0.454295 51.00000,1.0000\n`
+`
 
 main()
 
