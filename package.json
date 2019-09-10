@@ -4,7 +4,7 @@
   "description": "taxi vendor app for BookingGo grad scheme",
   "main": "app.js",
   "scripts": {
-    "console": "node console-app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
