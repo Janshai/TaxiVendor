@@ -15,8 +15,38 @@ function main() {
     }
 
     let passengers = yargs.argv.passengers
+    let pickup = yargs.argv._[0]
+    let dropoff = yargs.argv._[1]
 
-    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], passengers)
+    if (yargs.argv._.length == 3) {
+        let vendor = yargs.argv._[2]
+        if ((vendor == "dave") || (vendor == "eric") || (vendor == "jeff")) {
+            singleVendorApplication(vendor, pickup, dropoff, passengers)
+        } else {
+            console.log("Invalid supplierID")
+        }
+    } else {
+        allVendorsApplication(pickup, dropoff, passengers)
+    }
+
+
+
+}
+
+function singleVendorApplication(vendor, pickup, dropoff, passengers) {
+    cars.getRideOptionsForSingleVendor(vendor, pickup, dropoff, passengers)
+    .then(rides => {
+        for (i in rides) {
+            let ride = rides[i]
+            console.log(ride.type + " - " + ride.price)
+        }
+    }, error => {
+        console.log(error)
+    })
+}
+
+function allVendorsApplication(pickup, dropoff, passengers) {
+    cars.getRideOptions(pickup, dropoff, passengers)
     .then(rides => {
         if (Object.keys(rides).length == 0) {
             console.log("No rides available right now, please try again later.")

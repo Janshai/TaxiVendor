@@ -25,6 +25,11 @@ function getRideOptions(pickup, dropoff, passengers) {
 
 }
 
+function getRideOptionsForSingleVendor(vendor, pickup, dropoff, passengers) {
+    var eligibleCarTypes = getEligibleCarTypes(passengers || 0)
+    return getOptionsForVendor(vendor, pickup, dropoff, eligibleCarTypes)
+}
+
 function selectCheapestCars(vendorRides) {
     var cheapestCars = {}
     for (i in vendorRides) {
@@ -91,4 +96,4 @@ function getEligibleCarTypes(passengers) {
     return eligibleCarTypes
 }
 
-module.exports = {getRideOptions}
+module.exports = {getRideOptions, getRideOptionsForSingleVendor}
