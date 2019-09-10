@@ -33,10 +33,10 @@ function unWrapCarList(json) {
 
 function parseError(error, supplier) {
     if (error.timeout) {
-        return supplier + " timed out."
+        return supplier + " timed out.\n"
     }
     let errorBody = error.response.body
-    let supplierID = " for supplier: " + supplier
+    let supplierID = " for supplier: " + supplier + "\n"
     if (errorBody.status == 400) {
         return errorBody.message + supplierID
     } else if (errorBody.status == 500) {

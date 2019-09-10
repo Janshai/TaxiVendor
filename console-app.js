@@ -18,7 +18,7 @@ function main() {
 
     cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], passengers)
     .then(rides => {
-        if (rides.length == 0) {
+        if (Object.keys(rides).length == 0) {
             console.log("No rides available right now, please try again later.")
         } else {
             for (i in rides) {
