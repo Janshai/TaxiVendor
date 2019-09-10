@@ -11,9 +11,6 @@ function getAll(req, res) {
         res.json(rides)
     })
 
-    //TODO: Find a way to collect notes
-    //TODO: Find a way to report error if server gives bad response error
-
 }
 
 function getSingleVendor(req, res) {

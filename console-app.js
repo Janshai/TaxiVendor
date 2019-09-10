@@ -52,8 +52,11 @@ function allVendorsApplication(pickup, dropoff, passengers) {
             console.log("No rides available right now, please try again later.")
         } else {
             for (i in rides) {
-                let ride = rides[i]
-                console.log(ride.type + " - " + ride.supplier + " - " + ride.price)
+                if (i != "errors") {
+                    let ride = rides[i]
+                    console.log(ride.type + " - " + ride.supplier + " - " + ride.price)
+                }
+
             }
         }
     })

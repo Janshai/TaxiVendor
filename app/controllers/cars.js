@@ -32,10 +32,12 @@ function getRideOptionsForSingleVendor(vendor, pickup, dropoff, passengers) {
 
 function selectCheapestCars(vendorRides) {
     var cheapestCars = {}
+    cheapestCars.errors = []
     for (i in vendorRides) {
         let rides = vendorRides[i]
         if (typeof rides === "string") {
-            console.log(rides)
+            cheapestCars.errors.push(rides)
+            console.log(rides + "\n")
         } else {
             for (j in rides) {
                 let ride = rides[j]
