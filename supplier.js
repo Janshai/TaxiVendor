@@ -2,17 +2,20 @@ const superagent = require('superagent')
 const rideOption = require('./rideOption')
 const baseURL = 'https://techtest.rideways.com/'
 
-function getRideOptions(supplier, pickup, dropoff, callback) {
+function getRideOptions(supplier, pickup, dropoff) {
     let url = baseURL + supplier + "/"
-    superagent.get(url)
-    .query({ pickup: pickup, dropoff: dropoff })
-    .end((err, res) => {
-        if (err) {
-            return callback(parseError(err.response.body))
-        }
-        let carList = unWrapCarList(res.body)
-        callback(undefined, carList)
+    return new Promise((resolve, reject) => {
+        superagent.get(url)
+        .query({ pickup: pickup, dropoff: dropoff })
+        .end((err, res) => {
+            if (err) {
+                reject(parseError(err.response.body))
+            }
+            let carList = unWrapCarList(res.body)
+            resolve(carList)
+        })
     })
+
 }
 
 function unWrapCarList(json) {

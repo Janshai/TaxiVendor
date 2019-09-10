@@ -16,13 +16,15 @@ function main() {
 
     let passengers = yargs.argv.passengers
 
-    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], passengers, (err, carList) => {
-        if (err) { return console.log("Error: " + err)}
-
-        for (i in carList) {
-            let car = carList[i]
-            let string = car.type + " - " + car.price
-            console.log(string)
+    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], passengers)
+    .then(rides => {
+        if (rides.length == 0) {
+            console.log("No rides available right now, please try again later.")
+        } else {
+            for (i in rides) {
+                let ride = rides[i]
+                console.log(ride.type + " - " + ride.supplier + " - " + ride.price)
+            }
         }
     })
 }
