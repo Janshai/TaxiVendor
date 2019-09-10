@@ -1,11 +1,10 @@
 const yargs = require('yargs')
 const cars = require('./cars')
-const supplier = require('./supplier')
 
 const argsErrorString = `Error, please provide a pickup and dropoff (longitude,lattitude)\n
 Examples:\n
 node console-app.js 51.470020,-0.454295 51.00000,1.0000
-npm console 51.470020,-0.454295 51.00000,1.0000\n`
+npm run console 51.470020,-0.454295 51.00000,1.0000\n`
 
 main()
 
@@ -15,10 +14,10 @@ function main() {
         return
     }
 
-    //TODO: validate the arguments with regex
 
-    supplier.getRideOptions('dave', (err, carList) => {
-        if (err) { return console.log(err) }
+
+    cars.getRideOptions(yargs.argv._[0], yargs.argv._[1], (err, carList) => {
+        if (err) { return console.log("Error: " + err)}
 
         for (i in carList) {
             let car = carList[i]

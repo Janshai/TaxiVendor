@@ -2,13 +2,13 @@ const superagent = require('superagent')
 const rideOption = require('./rideOption')
 const baseURL = 'https://techtest.rideways.com/'
 
-function getRideOptions(supplier, callback) {
+function getRideOptions(supplier, pickup, dropoff, callback) {
     let url = baseURL + supplier + "/"
     superagent.get(url)
-    .query({ pickup: "3.410632,-2.157533", dropoff: "51.00000,1.0000" })
+    .query({ pickup: pickup, dropoff: dropoff })
     .end((err, res) => {
         if (err) {
-            return callback(err)
+            return callback(parseError(err.response.body))
         }
 
         let carList = unWrapCarList(res.body)
@@ -26,6 +26,17 @@ function unWrapCarList(json) {
     }
 
     return carList
+}
+
+function parseError(error) {
+    if (error.status == 400) {
+        return error.message
+    } else if (error.status == 500) {
+        return error.error
+    } else {
+        return "Unknown Error"
+    }
+
 }
 
 module.exports = {getRideOptions}
