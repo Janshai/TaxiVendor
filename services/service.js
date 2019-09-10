@@ -1,13 +1,14 @@
 const superagent = require('superagent')
 const rideOption = require('../models/rideOption')
 const baseURL = 'https://techtest.rideways.com/'
+const timeout_limit = 2000
 
 function getRideOptions(supplier, pickup, dropoff) {
     let url = baseURL + supplier + "/"
     return new Promise((resolve, reject) => {
         superagent.get(url)
         .query({ pickup: pickup, dropoff: dropoff })
-        .timeout({response: 2000})
+        .timeout({response: timeout_limit})
         .end((err, res) => {
             if (err) {
                 return reject(parseError(err, supplier))
