@@ -5,7 +5,7 @@ function getAll(req, res) {
     let dropoff = req.query.dropoff
     var passengers
     if (req.query.passengers) {
-        let passengers = parseInt(req.query.passengers)
+        passengers = parseInt(req.query.passengers)
     } else {
         passengers = undefined
     }
@@ -48,7 +48,7 @@ function getSingleVendor(req, res) {
     let dropoff = req.query.dropoff
     var passengers
     if (req.query.passengers) {
-        let passengers = parseInt(req.query.passengers)
+        passengers = parseInt(req.query.passengers)
     } else {
         passengers = undefined
     }
