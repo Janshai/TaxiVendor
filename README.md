@@ -4,12 +4,12 @@
 ## Setup
 ###Dependencies:
 
-* npm
+* npm (I am using version 6.11.3)
 * javascript
-* node
-* express
-* superagent
-* yargs
+* node (I am using version 11.11.0)
+* express (^4.17.1)
+* superagent (^5.1.0)
+* yargs (^14.0.0)
 
 
 ###Dependency Installation Instructions:
@@ -98,6 +98,17 @@ Example:
     }
 }
 ```
+
+If there are errors that cause the requests to each supplier to fail, the response will look something like this.
+
+```
+{
+    "status": 400,
+    "error": "Bad Request",
+    "message": "If passengers parameter specified, it must be an integer"
+}
+```
+
 
 ####Other Request
 
